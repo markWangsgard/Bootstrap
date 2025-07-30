@@ -19,10 +19,21 @@ export const DeleteItem = (item) => {
 };
 
 export const ToggleComplete = (item) => {
-  AllItems.splice(AllItems.indexOf({ Item: item }), 1);
-  const newItem = {
-    Item: item,
-    Complete: (!item.Complete),
-  };
-  AllItems.push(newItem);
+  if (typeof item === "string")
+  {
+    AllItems.splice(AllItems.indexOf({ Item: item }), 1);
+    const newItem = {
+      Item: item,
+      Complete: (!item.Complete),
+    };
+    AllItems.push(newItem);
+  }
+  else {
+    AllItems.splice(AllItems.indexOf(item), 1);
+    const newItem = {
+      Item: item.Item,
+      Complete: (!item.Complete),
+    };
+    AllItems.push(newItem);
+  }
 };
