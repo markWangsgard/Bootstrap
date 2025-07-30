@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../css/custom.css">
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col bg-primary text-white">
-                Milk
-            </div>
-            <div class="col bg-primary text-white">
-                Cheese
-            </div>
+    <link rel="stylesheet" href="../css/custom.css" />
+    <script type="module" src="JavaScript/ui.js"></script>
+  </head>
+  <body class="bg-dark">
+    <header class="bg-primary">
+      <div class="container justify-content-center">
+        <h2 class="text-center">To-do List</h2>
+      </div>
+    </header>
+    <main>
+        <div class="container">
+            <ul class="list-unstyled" id="todo-list">
+                <li>
+                    <input type="checkbox" name="input1" id="input1" checked>
+                    <label for="input1">Milk the cows</label> 
+                </li>
+                <li>Feed the horses</li>
+            </ul>
         </div>
-    </div>
-</body>
+    </main>
+    <footer class="bg-primary fixed-bottom">
+      <div class="container">
+        <p class="text-center">Tasks completed: 5</p>
+      </div>
+    </footer>
+  </body>
 </html>
