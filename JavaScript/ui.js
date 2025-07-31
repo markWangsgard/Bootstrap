@@ -73,8 +73,23 @@ const updateTasksCompleted = () => {
     (numberOfCompletedTasks + numberOfIncompleteTasks);
 };
 
+
+const addEventListeners = () => {
+  const newTaskFormElement = document.getElementById("new-task-form");
+  newTaskFormElement.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const newTaskInputElement = document.getElementById("new-task");
+    const newTaskName = newTaskInputElement.value.trim();
+    if (newTaskName) {
+      AddItem(newTaskName);
+      newTaskInputElement.value = "";
+      generateTodoList();
+    }
+  });
+};
 generateTodoList();
 updateTasksCompleted();
+addEventListeners();
 
 // <input type="checkbox" name="input1" id="input1">
 // <label for="input1">Milk the cows</label>
