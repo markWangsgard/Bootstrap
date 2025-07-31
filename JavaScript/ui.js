@@ -23,7 +23,7 @@ const generateTodoItemsFromArray = (itemArray) => {
   const todoListElement = document.getElementById("todo-list");
   itemArray.forEach((i) => {
     const listItemElement = document.createElement("li");
-    listItemElement.classList.add("d-flex", "container", "justify-content-center","justify-content-sm-start", "pt-2")
+    listItemElement.classList.add("d-flex", "container", "justify-content-center","justify-content-sm-between", "align-items-center", "mt-2")
     
     const itemContainerElement = document.createElement("div");
     const checkboxElement = document.createElement("input");
@@ -47,7 +47,7 @@ const generateTodoItemsFromArray = (itemArray) => {
 
     const deleteElement = document.createElement("button");
     deleteElement.textContent = "Delete";
-    deleteElement.classList.add("btn", "btn-danger", "ms-3");
+    deleteElement.classList.add("btn", "btn-danger");
     deleteElement.addEventListener("click", (e) => {
       e.preventDefault();
       DeleteItem(i);
@@ -56,8 +56,8 @@ const generateTodoItemsFromArray = (itemArray) => {
 
     itemContainerElement.appendChild(checkboxElement);
     itemContainerElement.appendChild(labelElement);
-    itemContainerElement.appendChild(deleteElement);
     listItemElement.appendChild(itemContainerElement);
+    listItemElement.appendChild(deleteElement);
     todoListElement.appendChild(listItemElement);
   });
 };
