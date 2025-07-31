@@ -46,8 +46,8 @@ const generateTodoItemsFromArray = (itemArray) => {
     }
 
     const deleteElement = document.createElement("button");
-    deleteElement.textContent = "Delete";
-    deleteElement.classList.add("btn", "btn-danger");
+    // deleteElement.textContent = "Delete";
+    deleteElement.classList.add("btn-close", "btn-close-white");
     deleteElement.addEventListener("click", (e) => {
       e.preventDefault();
       DeleteItem(i);
