@@ -8,12 +8,18 @@ import {
 
 AddItem("Cheese");
 AddItem("Apple");
-ToggleComplete("Apple");
+// ToggleComplete("Apple");
 
 //Create Each Item
 const generateTodoList = () => {
   const todoListElement = document.getElementById("todo-list");
   todoListElement.replaceChildren();
+  if (GetCompleteItems().length === 0 && GetIncompleteItems().length === 0) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.classList.add("text-center", "text-white", "my-4");
+    emptyMessage.textContent = "No tasks available, please add a task to get started.";
+    todoListElement.appendChild(emptyMessage);
+  }
   generateTodoItemsFromArray(GetIncompleteItems());
   generateTodoItemsFromArray(GetCompleteItems());
   updateTasksCompleted();
@@ -23,7 +29,7 @@ const generateTodoItemsFromArray = (itemArray) => {
   const todoListElement = document.getElementById("todo-list");
   itemArray.forEach((i) => {
     const listItemElement = document.createElement("li");
-    listItemElement.classList.add("d-flex", "container", "justify-content-center","justify-content-sm-between", "align-items-center", "mt-2")
+    listItemElement.classList.add("d-flex", "container", "justify-content-center","justify-content-sm-between", "align-items-center", "mt-2", "px-5")
     
     const itemContainerElement = document.createElement("div");
     const checkboxElement = document.createElement("input");
