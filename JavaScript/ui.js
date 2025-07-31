@@ -24,6 +24,8 @@ const generateTodoItemsFromArray = (itemArray) => {
   itemArray.forEach((i) => {
     const listItemElement = document.createElement("li");
     listItemElement.classList.add("d-flex", "container", "justify-content-center","justify-content-sm-start", "pt-2")
+    
+    const itemContainerElement = document.createElement("div");
     const checkboxElement = document.createElement("input");
     checkboxElement.type = "checkbox";
     checkboxElement.name = i.Item + "Checkbox";
@@ -42,8 +44,20 @@ const generateTodoItemsFromArray = (itemArray) => {
       checkboxElement.checked = true;
       labelElement.classList.add("text-decoration-line-through");
     }
-    listItemElement.appendChild(checkboxElement);
-    listItemElement.appendChild(labelElement);
+
+    const deleteElement = document.createElement("button");
+    deleteElement.textContent = "Delete";
+    deleteElement.classList.add("btn", "btn-danger", "ms-3");
+    deleteElement.addEventListener("click", (e) => {
+      e.preventDefault();
+      DeleteItem(i);
+      generateTodoList();
+    });
+
+    itemContainerElement.appendChild(checkboxElement);
+    itemContainerElement.appendChild(labelElement);
+    itemContainerElement.appendChild(deleteElement);
+    listItemElement.appendChild(itemContainerElement);
     todoListElement.appendChild(listItemElement);
   });
 };
@@ -59,7 +73,6 @@ const updateTasksCompleted = () => {
     (numberOfCompletedTasks + numberOfIncompleteTasks);
 };
 
-DeleteItem("Apple");
 generateTodoList();
 updateTasksCompleted();
 
