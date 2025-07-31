@@ -15,25 +15,21 @@ export const AddItem = (item) => {
   AllItems.push(newItem);
 };
 export const DeleteItem = (item) => {
-  AllItems.splice(AllItems.indexOf({ Item: item }), 1);
+  if (typeof item === "string") {
+    item = AllItems.find((i) => i.Item === item);
+  }
+  AllItems.splice(AllItems.indexOf(item), 1);
 };
 
 export const ToggleComplete = (item) => {
   if (typeof item === "string")
   {
-    AllItems.splice(AllItems.indexOf({ Item: item }), 1);
-    const newItem = {
-      Item: item,
-      Complete: (!item.Complete),
-    };
-    AllItems.push(newItem);
+    item = AllItems.find((i) => i.Item === item);
   }
-  else {
     AllItems.splice(AllItems.indexOf(item), 1);
     const newItem = {
       Item: item.Item,
       Complete: (!item.Complete),
     };
     AllItems.push(newItem);
-  }
 };

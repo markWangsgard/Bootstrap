@@ -14,47 +14,38 @@ ToggleComplete("Apple");
 const generateTodoList = () => {
   const todoListElement = document.getElementById("todo-list");
   todoListElement.replaceChildren();
-  const incompleteItems = GetIncompleteItems();
-  const completeItems = GetCompleteItems();
-  incompleteItems.forEach((i) => {
-    const listItemElement = document.createElement("li");
-    const checkboxElement = document.createElement("input");
-    checkboxElement.type = "checkbox";
-    checkboxElement.name = i.Item + "Checkbox";
-    checkboxElement.id = i.Item + "Checkbox";
-    checkboxElement.addEventListener("input", (e) => {
-      e.preventDefault();
-      ToggleComplete(i);
-      generateTodoList();
-    });
-    const labelElement = document.createElement("label");
-    labelElement.htmlFor = i.Item + "Checkbox";
-    labelElement.textContent = i.Item;
-    listItemElement.appendChild(checkboxElement);
-    listItemElement.appendChild(labelElement);
-    todoListElement.appendChild(listItemElement);
-  });
-  completeItems.forEach((i) => {
-    const listItemElement = document.createElement("li");
-    const checkboxElement = document.createElement("input");
-    checkboxElement.type = "checkbox";
-    checkboxElement.name = i.Item + "Checkbox";
-    checkboxElement.id = i.Item + "Checkbox";
-    checkboxElement.checked = true;
-    checkboxElement.addEventListener("input", (e) => {
-      e.preventDefault();
-      ToggleComplete(i);
-      generateTodoList();
-    });
-    const labelElement = document.createElement("label");
-    labelElement.classList.add("text-decoration-line-through");
-    labelElement.htmlFor = i.Item + "Checkbox";
-    labelElement.textContent = i.Item;
-    listItemElement.appendChild(checkboxElement);
-    listItemElement.appendChild(labelElement);
-    todoListElement.appendChild(listItemElement);
-  });
+  generateTodoItemsFromArray(GetIncompleteItems());
+  generateTodoItemsFromArray(GetCompleteItems());
   updateTasksCompleted();
+};
+
+const generateTodoItemsFromArray = (itemArray) => {
+  const todoListElement = document.getElementById("todo-list");
+  itemArray.forEach((i) => {
+    const listItemElement = document.createElement("li");
+    listItemElement.classList.add("d-flex", "container", "justify-content-center","justify-content-sm-start", "pt-2")
+    const checkboxElement = document.createElement("input");
+    checkboxElement.type = "checkbox";
+    checkboxElement.name = i.Item + "Checkbox";
+    checkboxElement.id = i.Item + "Checkbox";
+    checkboxElement.classList.add("form-check-input");
+    checkboxElement.addEventListener("input", (e) => {
+      e.preventDefault();
+      ToggleComplete(i);
+      generateTodoList();
+    });
+    const labelElement = document.createElement("label");
+    labelElement.htmlFor = i.Item + "Checkbox";
+    labelElement.textContent = i.Item;
+    labelElement.classList.add("px-3", "form-check-label")
+    if (i.Complete) {
+      checkboxElement.checked = true;
+      labelElement.classList.add("text-decoration-line-through");
+    }
+    listItemElement.appendChild(checkboxElement);
+    listItemElement.appendChild(labelElement);
+    todoListElement.appendChild(listItemElement);
+  });
 };
 
 const updateTasksCompleted = () => {
@@ -68,6 +59,7 @@ const updateTasksCompleted = () => {
     (numberOfCompletedTasks + numberOfIncompleteTasks);
 };
 
+DeleteItem("Apple");
 generateTodoList();
 updateTasksCompleted();
 
